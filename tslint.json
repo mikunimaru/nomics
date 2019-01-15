@@ -1,0 +1,16 @@
+{
+  "extends": ["tslint:recommended", "./node_modules/gts/tslint.json"],
+  "rules": {
+    "no-console": {
+      "severity": "warning",
+      "options": [
+        "debug",
+        "info",
+        "time",
+        "timeEnd",
+        "trace"
+      ]
+    },
+    "object-literal-sort-keys":false
+  }
+}

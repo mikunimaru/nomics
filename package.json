@@ -1,0 +1,25 @@
+{
+  "name": "nomics",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nomics",
+    "cryptocurrency",
+    "bitcoin"
+  ],
+  "author": "mikunimaru",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^10.12.18",
+    "@types/node-fetch": "^2.1.4",
+    "gts": "^0.9.0",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "node-fetch": "^2.3.0"
+  }
+}
