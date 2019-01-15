@@ -7,7 +7,7 @@ if (fetch === undefined) {
 // tslint:enable
 export default class Nomics {
 
-  apiKey = "2018-09-demo-dont-deploy-b69315e440beb145";
+  private apiKey = "2018-09-demo-dont-deploy-b69315e440beb145";
 
   constructor({apiKey}: {apiKey?: string}) {
     apiKey ? this.apiKey = apiKey
