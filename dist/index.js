@@ -18,7 +18,7 @@ class Nomics {
         return this.getCurrenciesV1()
             .catch((err) => {
             console.error("Error in 'currencies' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     /**
@@ -29,7 +29,7 @@ class Nomics {
         return this.getPricesV1()
             .catch((err) => {
             console.error("Error in 'prices' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     /** Open and close prices and volume for all currencies between a customizable time range. */
@@ -37,7 +37,7 @@ class Nomics {
         return this.getCurrenciesIntervalV1({ startISOString, endISOString })
             .catch((err) => {
             console.error("Error in 'currenciesInterval' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     /**
@@ -58,7 +58,7 @@ class Nomics {
         return this.getCurrenciesSparklineV1({ startISOString, endISOString })
             .catch((err) => {
             console.error("Error in 'currenciesSparkline' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     /** Open and close supply information for all currencies between a customizable time interval. */
@@ -66,7 +66,7 @@ class Nomics {
         return this.getSuppliesIntervalV1({ startISOString, endISOString })
             .catch((err) => {
             console.error("Error in 'suppliesInterval' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     /** Returns all time high information for all currencies. */
@@ -74,7 +74,7 @@ class Nomics {
         return this.getAllTimeHighsV1()
             .catch((err) => {
             console.error("Error in 'allTimeHigh' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     //// Markets ////
@@ -87,7 +87,7 @@ class Nomics {
         return this.getMarketsV1({ exchange, base, quote })
             .catch((err) => {
             console.error("Error in 'markets' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     /**
@@ -98,7 +98,7 @@ class Nomics {
         return this.getMarketPricesV1({ nomicsCurrencyID })
             .catch((err) => {
             console.error("Error in 'marketPrices' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     /**
@@ -109,7 +109,7 @@ class Nomics {
         return this.getMarketIntervalV1({ nomicsCurrencyID, hours, startISOString, endISOString })
             .catch((err) => {
             console.error("Error in 'marketInterval' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     /** The exchange market prices endpoint returns prices for the last trade in each market */
@@ -117,7 +117,7 @@ class Nomics {
         return this.getExchangeMarketPricesV1({ nomicsCurrencyID, exchange })
             .catch((err) => {
             console.error("Error in 'exchangeMarketPrices' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     /**
@@ -128,7 +128,7 @@ class Nomics {
         return this.getExchangeMarketIntervalV1({ nomicsCurrencyID, exchange, startISOString, endISOString })
             .catch((err) => {
             console.error("Error in 'exchangeMarketInterval' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     /**
@@ -139,7 +139,7 @@ class Nomics {
         return this.getMarketCapHistoryV1({ startISOString, endISOString })
             .catch((err) => {
             console.error("Error in 'marketCapHistory' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     /**
@@ -150,7 +150,7 @@ class Nomics {
         return this.getDashboardV1()
             .catch((err) => {
             console.error("Error in 'marketCapHistory' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     //// Candles ////
@@ -174,7 +174,7 @@ class Nomics {
         return this.getAggregatedOHLCVCandlesV1({ interval, nomicsCurrencyID, startISOString, endISOString })
             .catch((err) => {
             console.error("Error in 'aggregatedOHLCVCandles' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     /**
@@ -195,7 +195,7 @@ class Nomics {
         return this.getExchangeOHLCVCandlesV1({ interval, exchange, market, startISOString, endISOString })
             .catch((err) => {
             console.error("Error in 'exchangeOHLCVCandles' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     //// Volume ////
@@ -207,7 +207,7 @@ class Nomics {
         return this.getGlobalVolumeHistoryV1({ startISOString, endISOString })
             .catch((err) => {
             console.error("Error in 'globalVolumeHistory' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     //// Exchange Rates ////
@@ -223,7 +223,7 @@ class Nomics {
         return this.getExchangeRatesV1()
             .catch((err) => {
             console.error("Error in 'exchangeRates' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     /**
@@ -237,7 +237,7 @@ class Nomics {
         return this.getExchangeRatesHistoryV1({ nomicsCurrencyID, startISOString, endISOString })
             .catch((err) => {
             console.error("Error in 'exchangeRatesHistory' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     /**
@@ -249,7 +249,7 @@ class Nomics {
         return this.getExchangeRatesIntervalV1({ startISOString, endISOString })
             .catch((err) => {
             console.error("Error in 'exchangeRatesInterval' method of nomics module\n" + err);
-            return;
+            throw new Error(err);
         });
     }
     async getExchangeRatesIntervalV1({ startISOString, endISOString }) {

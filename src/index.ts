@@ -17,11 +17,11 @@ export default class Nomics {
   ////  Currencies ////
 
   /** The currencies endpoint returns all the currencies that Nomics supports. */
-  currencies(): Promise<void | Array<{id: string}>> {
+  currencies(): Promise<Array<{id: string}>> {
     return this.getCurrenciesV1()
       .catch((err) => {
         console.error("Error in 'currencies' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
@@ -29,22 +29,22 @@ export default class Nomics {
    * The prices endpoint returns current prices for all currencies.
    * Prices are updated every 10 seconds.
    */
-  prices(): Promise<void | Array<{ currency: string, price: string }>> {
+  prices(): Promise<Array<{ currency: string, price: string }>> {
     return this.getPricesV1()
       .catch((err) => {
         console.error("Error in 'prices' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
   /** Open and close prices and volume for all currencies between a customizable time range. */
   currenciesInterval({ startISOString, endISOString }:
                      { startISOString: string, endISOString?: string }):
-                     Promise<void | NomicsCurrencyInterval[]> {
+                     Promise<NomicsCurrencyInterval[]> {
     return this.getCurrenciesIntervalV1({ startISOString, endISOString })
       .catch((err) => {
         console.error("Error in 'currenciesInterval' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
@@ -63,31 +63,31 @@ export default class Nomics {
    * times and prices you can use the Aggregated OHLCV Candles endpoint.
    */
   currenciesSparkline({ startISOString, endISOString }:
-    { startISOString: string, endISOString?: string }): Promise<void | NomicsCurrenciesSparkline[]> {
+    { startISOString: string, endISOString?: string }): Promise<NomicsCurrenciesSparkline[]> {
     return this.getCurrenciesSparklineV1({ startISOString, endISOString })
       .catch((err) => {
         console.error("Error in 'currenciesSparkline' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
   /** Open and close supply information for all currencies between a customizable time interval. */
   suppliesInterval({ startISOString, endISOString }:
                       { startISOString: string, endISOString?: string }):
-                      Promise<void | NomicsCurrenciesSparkline[]> {
+                      Promise<NomicsCurrenciesSparkline[]> {
     return this.getSuppliesIntervalV1({ startISOString, endISOString })
       .catch((err) => {
         console.error("Error in 'suppliesInterval' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
   /** Returns all time high information for all currencies. */
-  allTimeHighs(): Promise<void | NomicsAllTimeHighs[]> {
+  allTimeHighs(): Promise<NomicsAllTimeHighs[]> {
     return this.getAllTimeHighsV1()
       .catch((err) => {
         console.error("Error in 'allTimeHigh' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
@@ -99,11 +99,11 @@ export default class Nomics {
    * base and quote currency.
    */
   markets({exchange, base, quote}:
-          {exchange?: string, base?: string[], quote?: string[]}): Promise<void | NomicsMarkets[]> {
+          {exchange?: string, base?: string[], quote?: string[]}): Promise<NomicsMarkets[]> {
     return this.getMarketsV1({exchange, base, quote})
       .catch((err) => {
         console.error("Error in 'markets' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
@@ -111,11 +111,11 @@ export default class Nomics {
    * The market prices endpoint returns prices in USD for
    * the last trade in each market with the given base currency.
    */
-  marketPrices({ nomicsCurrencyID }: { nomicsCurrencyID: string }): Promise<void | NomicsMarketPrices[]> {
+  marketPrices({ nomicsCurrencyID }: { nomicsCurrencyID: string }): Promise<NomicsMarketPrices[]> {
     return this.getMarketPricesV1({ nomicsCurrencyID })
       .catch((err) => {
         console.error("Error in 'marketPrices' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
@@ -126,21 +126,21 @@ export default class Nomics {
   marketInterval({nomicsCurrencyID, hours, startISOString, endISOString}:
                  {nomicsCurrencyID: string, hours?: number,
                   startISOString?: string, endISOString?: string}):
-                  Promise<void | NomicsMarketInterval[]> {
+                  Promise<NomicsMarketInterval[]> {
       return this.getMarketIntervalV1({nomicsCurrencyID, hours, startISOString, endISOString})
         .catch((err) => {
           console.error("Error in 'marketInterval' method of nomics module\n" + err);
-          return;
+          throw new Error(err);
         });
   }
 
   /** The exchange market prices endpoint returns prices for the last trade in each market */
   exchangeMarketPrices({nomicsCurrencyID, exchange}: {nomicsCurrencyID?: string, exchange?: string}):
-                          Promise<void | NomicsExchangeMarketPrices[]> {
+                          Promise<NomicsExchangeMarketPrices[]> {
     return this.getExchangeMarketPricesV1({nomicsCurrencyID, exchange})
       .catch((err) => {
         console.error("Error in 'exchangeMarketPrices' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
@@ -151,11 +151,11 @@ export default class Nomics {
   exchangeMarketInterval({nomicsCurrencyID, exchange, startISOString, endISOString}:
                          {nomicsCurrencyID?: string , exchange?: string,
                           startISOString: string, endISOString?: string}):
-                         Promise<void | NomicsExchangeMarketInterval[]> {
+                         Promise<NomicsExchangeMarketInterval[]> {
     return this.getExchangeMarketIntervalV1({nomicsCurrencyID, exchange, startISOString, endISOString})
       .catch((err) => {
         console.error("Error in 'exchangeMarketInterval' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
@@ -165,11 +165,11 @@ export default class Nomics {
    */
   marketCapHistory({startISOString, endISOString}:
                             {startISOString: string, endISOString?: string}):
-                            Promise<void | Array<{timestamp: string, marketcap: string}>> {
+                            Promise<Array<{timestamp: string, marketcap: string}>> {
     return this.getMarketCapHistoryV1({startISOString, endISOString})
       .catch((err) => {
         console.error("Error in 'marketCapHistory' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
@@ -177,11 +177,11 @@ export default class Nomics {
    * The dashboard endpoint is a high level view of the current state of the
    * market. It contains a wide variety of information and is updated every 10 seconds.
    */
-  dashboard(): Promise<void | NomicsDashboard[]> {
+  dashboard(): Promise<NomicsDashboard[]> {
     return this.getDashboardV1()
       .catch((err) => {
         console.error("Error in 'marketCapHistory' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
@@ -206,12 +206,12 @@ export default class Nomics {
   aggregatedOHLCVCandles({interval, nomicsCurrencyID, startISOString, endISOString}:
                             {interval: ("1d"|"1h"), nomicsCurrencyID: string,
                             startISOString?: string, endISOString?: string}):
-                            Promise<void | NomicsAggregatedOHLCVCandles[]> {
+                            Promise<NomicsAggregatedOHLCVCandles[]> {
 
     return this.getAggregatedOHLCVCandlesV1({interval, nomicsCurrencyID, startISOString, endISOString})
       .catch((err) => {
         console.error("Error in 'aggregatedOHLCVCandles' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
@@ -232,12 +232,12 @@ export default class Nomics {
   exchangeOHLCVCandles({interval, exchange, market, startISOString, endISOString}:
                           {interval: ("1d"|"4h"|"1h"|"30m"|"5m"|"1m"), exchange: string, market: string,
                           startISOString?: string, endISOString?: string}):
-                          Promise<void | NomicsExchangeOHLCVCandles[]> {
+                          Promise<NomicsExchangeOHLCVCandles[]> {
 
     return this.getExchangeOHLCVCandlesV1({interval, exchange, market, startISOString, endISOString})
       .catch((err) => {
         console.error("Error in 'exchangeOHLCVCandles' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
@@ -249,12 +249,12 @@ export default class Nomics {
    */
   globalVolumeHistory({ startISOString, endISOString }:
                            { startISOString?: string, endISOString?: string }):
-                           Promise<void | Array<{ timestamp: string, volume: string}>> {
+                           Promise<Array<{ timestamp: string, volume: string}>> {
 
     return this.getGlobalVolumeHistoryV1( {startISOString, endISOString} )
       .catch((err) => {
         console.error("Error in 'globalVolumeHistory' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
@@ -268,11 +268,11 @@ export default class Nomics {
    *
    * Currently, this endpoint does not support historical data, but this feature is planned.
    */
-  exchangeRates(): Promise<void | Array<{currency: string, rate: string, timestamp: string}>> {
+  exchangeRates(): Promise<Array<{currency: string, rate: string, timestamp: string}>> {
     return this.getExchangeRatesV1()
       .catch((err) => {
         console.error("Error in 'exchangeRates' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
@@ -285,11 +285,11 @@ export default class Nomics {
    */
   exchangeRatesHistory({ nomicsCurrencyID, startISOString, endISOString }:
                           { nomicsCurrencyID: string, startISOString: string, endISOString?: string }):
-                          Promise<void | Array<{timestamp: string, rate: string}>> {
+                          Promise<Array<{timestamp: string, rate: string}>> {
     return this.getExchangeRatesHistoryV1({ nomicsCurrencyID, startISOString, endISOString })
       .catch((err) => {
         console.error("Error in 'exchangeRatesHistory' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 
@@ -300,11 +300,11 @@ export default class Nomics {
    */
   exchangeRatesInterval({startISOString, endISOString}:
                            {startISOString: string, endISOString?: string}):
-                           Promise<void | NomicsExhangeRateInterval[]> {
+                           Promise<NomicsExhangeRateInterval[]> {
     return this.getExchangeRatesIntervalV1({startISOString, endISOString})
       .catch((err) => {
         console.error("Error in 'exchangeRatesInterval' method of nomics module\n" + err);
-        return;
+        throw new Error(err);
       });
   }
 

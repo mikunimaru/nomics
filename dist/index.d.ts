@@ -4,14 +4,14 @@ export default class Nomics {
         apiKey?: string;
     });
     /** The currencies endpoint returns all the currencies that Nomics supports. */
-    currencies(): Promise<void | Array<{
+    currencies(): Promise<Array<{
         id: string;
     }>>;
     /**
      * The prices endpoint returns current prices for all currencies.
      * Prices are updated every 10 seconds.
      */
-    prices(): Promise<void | Array<{
+    prices(): Promise<Array<{
         currency: string;
         price: string;
     }>>;
@@ -19,7 +19,7 @@ export default class Nomics {
     currenciesInterval({ startISOString, endISOString }: {
         startISOString: string;
         endISOString?: string;
-    }): Promise<void | NomicsCurrencyInterval[]>;
+    }): Promise<NomicsCurrencyInterval[]>;
     /**
      * The currencies sparkline endpoint returns prices for all currencies within a
      * customizable time interval suitable for sparkline charts.
@@ -37,14 +37,14 @@ export default class Nomics {
     currenciesSparkline({ startISOString, endISOString }: {
         startISOString: string;
         endISOString?: string;
-    }): Promise<void | NomicsCurrenciesSparkline[]>;
+    }): Promise<NomicsCurrenciesSparkline[]>;
     /** Open and close supply information for all currencies between a customizable time interval. */
     suppliesInterval({ startISOString, endISOString }: {
         startISOString: string;
         endISOString?: string;
-    }): Promise<void | NomicsCurrenciesSparkline[]>;
+    }): Promise<NomicsCurrenciesSparkline[]>;
     /** Returns all time high information for all currencies. */
-    allTimeHighs(): Promise<void | NomicsAllTimeHighs[]>;
+    allTimeHighs(): Promise<NomicsAllTimeHighs[]>;
     /**
      * The markets endpoint returns information on the exchanges and markets that
      * Nomics supports, in addition to the Nomics currency identifiers for the
@@ -54,14 +54,14 @@ export default class Nomics {
         exchange?: string;
         base?: string[];
         quote?: string[];
-    }): Promise<void | NomicsMarkets[]>;
+    }): Promise<NomicsMarkets[]>;
     /**
      * The market prices endpoint returns prices in USD for
      * the last trade in each market with the given base currency.
      */
     marketPrices({ nomicsCurrencyID }: {
         nomicsCurrencyID: string;
-    }): Promise<void | NomicsMarketPrices[]>;
+    }): Promise<NomicsMarketPrices[]>;
     /**
      * The market interval endpoint returns a summary of information about all
      * markets based in a given currency over a configurable time interval.
@@ -71,12 +71,12 @@ export default class Nomics {
         hours?: number;
         startISOString?: string;
         endISOString?: string;
-    }): Promise<void | NomicsMarketInterval[]>;
+    }): Promise<NomicsMarketInterval[]>;
     /** The exchange market prices endpoint returns prices for the last trade in each market */
     exchangeMarketPrices({ nomicsCurrencyID, exchange }: {
         nomicsCurrencyID?: string;
         exchange?: string;
-    }): Promise<void | NomicsExchangeMarketPrices[]>;
+    }): Promise<NomicsExchangeMarketPrices[]>;
     /**
      * The exchange market interval endpoint returns a summary of information about
      * all markets over a configurable time interval in their native values.
@@ -86,7 +86,7 @@ export default class Nomics {
         exchange?: string;
         startISOString: string;
         endISOString?: string;
-    }): Promise<void | NomicsExchangeMarketInterval[]>;
+    }): Promise<NomicsExchangeMarketInterval[]>;
     /**
      * MarketCap History is the total market cap for
      * all cryptoassets at intervals between the requested time period.
@@ -94,7 +94,7 @@ export default class Nomics {
     marketCapHistory({ startISOString, endISOString }: {
         startISOString: string;
         endISOString?: string;
-    }): Promise<void | Array<{
+    }): Promise<Array<{
         timestamp: string;
         marketcap: string;
     }>>;
@@ -102,7 +102,7 @@ export default class Nomics {
      * The dashboard endpoint is a high level view of the current state of the
      * market. It contains a wide variety of information and is updated every 10 seconds.
      */
-    dashboard(): Promise<void | NomicsDashboard[]>;
+    dashboard(): Promise<NomicsDashboard[]>;
     /**
      * The candles endpoint returns aggregated open, high, low, close, and volume
      * information for Nomics currencies. When asking for candles, a currency is
@@ -124,7 +124,7 @@ export default class Nomics {
         nomicsCurrencyID: string;
         startISOString?: string;
         endISOString?: string;
-    }): Promise<void | NomicsAggregatedOHLCVCandles[]>;
+    }): Promise<NomicsAggregatedOHLCVCandles[]>;
     /**
      * The exchange candles endpoint returns raw open, close, high, low, and volume
      * information for Nomics Markets. The data is not aggregated, therefore prices
@@ -145,7 +145,7 @@ export default class Nomics {
         market: string;
         startISOString?: string;
         endISOString?: string;
-    }): Promise<void | NomicsExchangeOHLCVCandles[]>;
+    }): Promise<NomicsExchangeOHLCVCandles[]>;
     /**
      * Volume History is the total volume for all cryptoassets
      * in USD at intervals between the requested time period.
@@ -153,7 +153,7 @@ export default class Nomics {
     globalVolumeHistory({ startISOString, endISOString }: {
         startISOString?: string;
         endISOString?: string;
-    }): Promise<void | Array<{
+    }): Promise<Array<{
         timestamp: string;
         volume: string;
     }>>;
@@ -165,7 +165,7 @@ export default class Nomics {
      *
      * Currently, this endpoint does not support historical data, but this feature is planned.
      */
-    exchangeRates(): Promise<void | Array<{
+    exchangeRates(): Promise<Array<{
         currency: string;
         rate: string;
         timestamp: string;
@@ -181,7 +181,7 @@ export default class Nomics {
         nomicsCurrencyID: string;
         startISOString: string;
         endISOString?: string;
-    }): Promise<void | Array<{
+    }): Promise<Array<{
         timestamp: string;
         rate: string;
     }>>;
@@ -193,7 +193,7 @@ export default class Nomics {
     exchangeRatesInterval({ startISOString, endISOString }: {
         startISOString: string;
         endISOString?: string;
-    }): Promise<void | NomicsExhangeRateInterval[]>;
+    }): Promise<NomicsExhangeRateInterval[]>;
     private getExchangeRatesIntervalV1;
     private getExchangeRatesHistoryV1;
     private getGlobalVolumeHistoryV1;
