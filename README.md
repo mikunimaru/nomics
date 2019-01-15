@@ -1,1 +1,1 @@
-The npm package for handling the nomics.com API.
+The node.js module for the nomics.com API.
