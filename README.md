@@ -1,0 +1,1 @@
+The npm package for handling the nomics.com API.
