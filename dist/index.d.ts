@@ -1,4 +1,4 @@
-export declare class Nomics {
+export default class Nomics {
     apiKey: string;
     constructor({ apiKey }: {
         apiKey?: string;

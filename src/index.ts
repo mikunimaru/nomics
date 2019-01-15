@@ -5,7 +5,7 @@ if (fetch === undefined) {
 }
 
 // tslint:enable
-export class Nomics {
+export default class Nomics {
 
   apiKey = "2018-09-demo-dont-deploy-b69315e440beb145";
 

@@ -497,4 +497,4 @@ class Nomics {
         }
     }
 }
-exports.Nomics = Nomics;
+exports.default = Nomics;
