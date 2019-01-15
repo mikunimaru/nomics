@@ -1,5 +1,5 @@
 export default class Nomics {
-    apiKey: string;
+    private apiKey;
     constructor({ apiKey }: {
         apiKey?: string;
     });
