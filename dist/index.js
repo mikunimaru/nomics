@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 if (fetch === undefined) {
     // tslint:disable
     // @ts-ignore
@@ -496,4 +497,4 @@ class Nomics {
         }
     }
 }
-exports = Nomics;
+exports.Nomics = Nomics;

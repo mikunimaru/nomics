@@ -5,7 +5,7 @@ if (fetch === undefined) {
 }
 
 // tslint:enable
-class Nomics {
+export class Nomics {
 
   apiKey = "2018-09-demo-dont-deploy-b69315e440beb145";
 
@@ -726,5 +726,3 @@ interface NomicsExhangeRateInterval {
   close: string;
   close_timestamp: string;
 }
-
-exports = Nomics;

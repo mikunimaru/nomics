@@ -1,4 +1,4 @@
-declare class Nomics {
+export declare class Nomics {
     apiKey: string;
     constructor({ apiKey }: {
         apiKey?: string;
@@ -320,4 +320,5 @@ interface NomicsExhangeRateInterval {
     close: string;
     close_timestamp: string;
 }
+export {};
 //# sourceMappingURL=index.d.ts.map
