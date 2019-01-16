@@ -30,13 +30,13 @@ class NomicsNode {
      * Get price with a single object.
      *
      *
-     * { _1ST: '0.02829',
-     *   _2GIVE: '0.00138',
-     *   ABA: '0.01547',
-     *   ABT: '0.07469',
-     *   ABTC: '0.13559',
-     *   ABY: '0.00124',
-     *   ABYSS: '0.00632',
+     * { _1ST: 0.02829,
+     *   _2GIVE: 0.00138,
+     *   ABA: 0.01547,
+     *   ABT: 0.07469,
+     *   ABTC: 0.13559,
+     *   ABY: 0.00124,
+     *   ABYSS: 0.00632,
      *   ...
      */
     async pricesObject() {
@@ -45,7 +45,7 @@ class NomicsNode {
             const currencyName = /^[_A-Za-z]/.test(currentValue.currency)
                 ? currentValue.currency
                 : "_" + currentValue.currency;
-            return Object.assign({}, previousValue, { [currencyName]: currentValue.price });
+            return Object.assign({}, previousValue, { [currencyName]: Number(currentValue.price) });
             // @ts-ignore
         }, {});
         return pricesObject;
