@@ -4,6 +4,7 @@ if (fetch === undefined) {
   var fetch = require("node-fetch");
 }
 
+export {NomicsNode} from "./nomicsNode";
 // tslint:enable
 export default class Nomics {
 
@@ -307,6 +308,8 @@ export default class Nomics {
         throw new Error(err);
       });
   }
+
+  //// private method ////
 
   private async getExchangeRatesIntervalV1({startISOString, endISOString}:
                                  {startISOString: string, endISOString?: string}):

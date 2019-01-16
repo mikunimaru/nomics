@@ -5,6 +5,8 @@ if (fetch === undefined) {
     // @ts-ignore
     var fetch = require("node-fetch");
 }
+var nomicsNode_1 = require("./nomicsNode");
+exports.NomicsNode = nomicsNode_1.NomicsNode;
 // tslint:enable
 class Nomics {
     constructor({ apiKey }) {
@@ -252,6 +254,7 @@ class Nomics {
             throw new Error(err);
         });
     }
+    //// private method ////
     async getExchangeRatesIntervalV1({ startISOString, endISOString }) {
         const start = `&start=${startISOString}`;
         const end = endISOString ? `&end=${endISOString}`
