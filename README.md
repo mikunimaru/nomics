@@ -37,13 +37,13 @@ Array of nomics currency id.
 #### pricesObject()
 An object of Prices.  
 
-     { _1ST: '0.02829',
-       _2GIVE: '0.00138',
-       ABA: '0.01547',
-       ABT: '0.07469',
-       ABTC: '0.13559',
-       ABY: '0.00124',
-       ABYSS: '0.00632',
+     { _1ST: 0.02829,
+       _2GIVE: 0.00138,
+       ABA: 0.01547,
+       ABT: 0.07469,
+       ABTC: 0.13559,
+       ABY: 0.00124,
+       ABYSS: 0.00632,
        ...
 
 If the ID name is a currency beginning with a number or symbol, an underscore is  
