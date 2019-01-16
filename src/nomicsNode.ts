@@ -53,6 +53,58 @@ export class NomicsNode {
       }, {});
     return pricesObject;
   }
+
+  /** Dashboard version of the pricesObject method. */
+  async dashboardObject(): Promise<NomicsNodeDashboardObject> {
+    const dashboard = await this.api.dashboard();
+    const dashboardObject: NomicsNodeDashboardObject =
+      dashboard.reduce<NomicsNodeDashboardObject>((previousValue, currentValue) => {
+        /** Change the key name for easy handling in GraphQL */
+        const currencyName = /^[_A-Za-z]/.test(currentValue.currency)
+                          ? currentValue.currency
+                          : "_" + currentValue.currency;
+
+        const numberObj =
+          Object.entries(currentValue).reduce((pValue, cValue) => {
+            const value = ["currency" , "highTimestamp" , "highExchange", "highQuoteCurrency"].includes(cValue[0])
+                        ? cValue[1]
+                        : Number(cValue[1]);
+            return {...pValue, [cValue[0]]: value};
+          }, {});
+
+        return {...previousValue, [currencyName] : numberObj};
+      // @ts-ignore
+      }, {});
+    return dashboardObject;
+  }
+}
+
+type NomicsNodePricesCurrencies = keyof NomicsNodePrices;
+type NomicsNodeDashboardObject = {
+  [key in NomicsNodePricesCurrencies]: NomicsNodeDashboard;
+};
+
+interface NomicsNodeDashboard {
+  currency: string;
+  dayOpen: number;
+  dayVolume: number;
+  dayOpenVolume: number;
+  weekOpen: number;
+  weekVolume: number;
+  weekOpenVolume: number;
+  monthOpen: number;
+  monthVolume: number;
+  monthOpenVolume: number;
+  yearOpen: number;
+  yearVolume: number;
+  yearOpenVolume: number;
+  close: number;
+  high: number;
+  highTimestamp: string;
+  highExchange: string;
+  highQuoteCurrency: string;
+  availableSupply: number;
+  maxSupply: number;
 }
 
 interface NomicsNodePrices {

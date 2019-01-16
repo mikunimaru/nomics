@@ -30,6 +30,33 @@ export declare class NomicsNode {
      *   ...
      */
     pricesObject(): Promise<NomicsNodePrices>;
+    dashboardObject(): Promise<NomicsNodeDashboardObject>;
+}
+declare type NomicsNodePricesCurrencies = keyof NomicsNodePrices;
+declare type NomicsNodeDashboardObject = {
+    [key in NomicsNodePricesCurrencies]: NomicsNodeDashboard;
+};
+interface NomicsNodeDashboard {
+    currency: string;
+    dayOpen: number;
+    dayVolume: number;
+    dayOpenVolume: number;
+    weekOpen: number;
+    weekVolume: number;
+    weekOpenVolume: number;
+    monthOpen: number;
+    monthVolume: number;
+    monthOpenVolume: number;
+    yearOpen: number;
+    yearVolume: number;
+    yearOpenVolume: number;
+    close: number;
+    high: number;
+    highTimestamp: string;
+    highExchange: string;
+    highQuoteCurrency: string;
+    availableSupply: number;
+    maxSupply: number;
 }
 interface NomicsNodePrices {
     _1ST: number;

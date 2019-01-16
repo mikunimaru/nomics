@@ -50,5 +50,23 @@ class NomicsNode {
         }, {});
         return pricesObject;
     }
+    async dashboardObject() {
+        const dashboard = await this.api.dashboard();
+        const dashboardObject = dashboard.reduce((previousValue, currentValue) => {
+            /** Make it easy to handle in GraphQL */
+            const currencyName = /^[_A-Za-z]/.test(currentValue.currency)
+                ? currentValue.currency
+                : "_" + currentValue.currency;
+            const numberObj = Object.entries(currentValue).reduce((pValue, cValue) => {
+                const value = ["currency", "highTimestamp", "highExchange", "highQuoteCurrency"].includes(cValue[0])
+                    ? cValue[1]
+                    : Number(cValue[1]);
+                return Object.assign({}, pValue, { [cValue[0]]: value });
+            }, {});
+            return Object.assign({}, previousValue, { [currencyName]: numberObj });
+            // @ts-ignore
+        }, {});
+        return dashboardObject;
+    }
 }
 exports.NomicsNode = NomicsNode;

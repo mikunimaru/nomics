@@ -48,3 +48,6 @@ An object of Prices.
 
 If the ID name is a currency beginning with a number or symbol, an underscore is  
 added at the beginning of the name to make it easier to work with GraphQL.
+
+#### dashboardObject()
+Dashboard version of the above method.
