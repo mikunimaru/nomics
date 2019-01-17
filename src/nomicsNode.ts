@@ -53,6 +53,41 @@ export class NomicsNode {
       }, {});
     return pricesObject;
   }
+  /**
+   * Get exchangeRates with a single object.
+   *
+   * {
+   *  USD:
+   *  { currency: 'USD',
+   *    rate: 1,
+   *    timestamp: '2019-01-16T00:00:00Z' },
+   *  EUR:
+   *  { currency: 'EUR',
+   *    rate: 1.14142,
+   *    timestamp: '2019-01-16T00:00:00Z' },
+   *  JPY:
+   *  { currency: 'JPY',
+   *    rate: 0.0092,
+   *    timestamp: '2019-01-16T00:00:00Z' },
+   *  ...
+   */
+  async exchangeRatesObject(): Promise<NomicsNodeExchangeRatesObject> {
+    const ratesArray = await this.api.exchangeRates();
+    // @ts-ignore
+    const ratesObject: NomicsNodeExchangeRatesObject =
+      ratesArray.reduce((previousValue, currentValue) => {
+        return {
+          ...previousValue,
+          [currentValue.currency] : {
+            currency: currentValue.currency,
+            rate: Number(currentValue.rate),
+            timestamp: currentValue.timestamp,
+          },
+        };
+      }, {});
+
+    return ratesObject;
+  }
 
   /** Dashboard version of the pricesObject method. */
   async dashboardObject(): Promise<NomicsNodeDashboardObject> {
@@ -77,6 +112,184 @@ export class NomicsNode {
       }, {});
     return dashboardObject;
   }
+
+}
+
+interface NomicsNodeExchangeRatesObject {
+  AED: NomicsNodeExchangeRates;
+  AFN: NomicsNodeExchangeRates;
+  ALL: NomicsNodeExchangeRates;
+  AMD: NomicsNodeExchangeRates;
+  ANG: NomicsNodeExchangeRates;
+  AOA: NomicsNodeExchangeRates;
+  ARS: NomicsNodeExchangeRates;
+  AUD: NomicsNodeExchangeRates;
+  AWG: NomicsNodeExchangeRates;
+  AZN: NomicsNodeExchangeRates;
+  BAM: NomicsNodeExchangeRates;
+  BBD: NomicsNodeExchangeRates;
+  BDT: NomicsNodeExchangeRates;
+  BGN: NomicsNodeExchangeRates;
+  BHD: NomicsNodeExchangeRates;
+  BIF: NomicsNodeExchangeRates;
+  BMD: NomicsNodeExchangeRates;
+  BND: NomicsNodeExchangeRates;
+  BOB: NomicsNodeExchangeRates;
+  BRL: NomicsNodeExchangeRates;
+  BSD: NomicsNodeExchangeRates;
+  BTC: NomicsNodeExchangeRates;
+  BTN: NomicsNodeExchangeRates;
+  BWP: NomicsNodeExchangeRates;
+  BYN: NomicsNodeExchangeRates;
+  BYR: NomicsNodeExchangeRates;
+  BZD: NomicsNodeExchangeRates;
+  CAD: NomicsNodeExchangeRates;
+  CDF: NomicsNodeExchangeRates;
+  CHF: NomicsNodeExchangeRates;
+  CLF: NomicsNodeExchangeRates;
+  CLP: NomicsNodeExchangeRates;
+  CNY: NomicsNodeExchangeRates;
+  COP: NomicsNodeExchangeRates;
+  CRC: NomicsNodeExchangeRates;
+  CUC: NomicsNodeExchangeRates;
+  CUP: NomicsNodeExchangeRates;
+  CVE: NomicsNodeExchangeRates;
+  CZK: NomicsNodeExchangeRates;
+  DJF: NomicsNodeExchangeRates;
+  DKK: NomicsNodeExchangeRates;
+  DOP: NomicsNodeExchangeRates;
+  DZD: NomicsNodeExchangeRates;
+  EGP: NomicsNodeExchangeRates;
+  ERN: NomicsNodeExchangeRates;
+  ETB: NomicsNodeExchangeRates;
+  ETH: NomicsNodeExchangeRates;
+  EUR: NomicsNodeExchangeRates;
+  FJD: NomicsNodeExchangeRates;
+  FKP: NomicsNodeExchangeRates;
+  GBP: NomicsNodeExchangeRates;
+  GEL: NomicsNodeExchangeRates;
+  GGP: NomicsNodeExchangeRates;
+  GHS: NomicsNodeExchangeRates;
+  GIP: NomicsNodeExchangeRates;
+  GMD: NomicsNodeExchangeRates;
+  GNF: NomicsNodeExchangeRates;
+  GTQ: NomicsNodeExchangeRates;
+  GYD: NomicsNodeExchangeRates;
+  HKD: NomicsNodeExchangeRates;
+  HNL: NomicsNodeExchangeRates;
+  HRK: NomicsNodeExchangeRates;
+  HTG: NomicsNodeExchangeRates;
+  HUF: NomicsNodeExchangeRates;
+  IDR: NomicsNodeExchangeRates;
+  ILS: NomicsNodeExchangeRates;
+  IMP: NomicsNodeExchangeRates;
+  INR: NomicsNodeExchangeRates;
+  IQD: NomicsNodeExchangeRates;
+  IRR: NomicsNodeExchangeRates;
+  ISK: NomicsNodeExchangeRates;
+  JEP: NomicsNodeExchangeRates;
+  JMD: NomicsNodeExchangeRates;
+  JOD: NomicsNodeExchangeRates;
+  JPY: NomicsNodeExchangeRates;
+  KES: NomicsNodeExchangeRates;
+  KGS: NomicsNodeExchangeRates;
+  KHR: NomicsNodeExchangeRates;
+  KMF: NomicsNodeExchangeRates;
+  KPW: NomicsNodeExchangeRates;
+  KRW: NomicsNodeExchangeRates;
+  KWD: NomicsNodeExchangeRates;
+  KYD: NomicsNodeExchangeRates;
+  KZT: NomicsNodeExchangeRates;
+  LAK: NomicsNodeExchangeRates;
+  LBP: NomicsNodeExchangeRates;
+  LKR: NomicsNodeExchangeRates;
+  LRD: NomicsNodeExchangeRates;
+  LSL: NomicsNodeExchangeRates;
+  LTL: NomicsNodeExchangeRates;
+  LVL: NomicsNodeExchangeRates;
+  LYD: NomicsNodeExchangeRates;
+  MAD: NomicsNodeExchangeRates;
+  MDL: NomicsNodeExchangeRates;
+  MGA: NomicsNodeExchangeRates;
+  MKD: NomicsNodeExchangeRates;
+  MMK: NomicsNodeExchangeRates;
+  MNT: NomicsNodeExchangeRates;
+  MOP: NomicsNodeExchangeRates;
+  MRO: NomicsNodeExchangeRates;
+  MUR: NomicsNodeExchangeRates;
+  MVR: NomicsNodeExchangeRates;
+  MWK: NomicsNodeExchangeRates;
+  MXN: NomicsNodeExchangeRates;
+  MYR: NomicsNodeExchangeRates;
+  MZN: NomicsNodeExchangeRates;
+  NAD: NomicsNodeExchangeRates;
+  NGN: NomicsNodeExchangeRates;
+  NIO: NomicsNodeExchangeRates;
+  NOK: NomicsNodeExchangeRates;
+  NPR: NomicsNodeExchangeRates;
+  NZD: NomicsNodeExchangeRates;
+  OMR: NomicsNodeExchangeRates;
+  PAB: NomicsNodeExchangeRates;
+  PEN: NomicsNodeExchangeRates;
+  PGK: NomicsNodeExchangeRates;
+  PHP: NomicsNodeExchangeRates;
+  PKR: NomicsNodeExchangeRates;
+  PLN: NomicsNodeExchangeRates;
+  PYG: NomicsNodeExchangeRates;
+  QAR: NomicsNodeExchangeRates;
+  RON: NomicsNodeExchangeRates;
+  RSD: NomicsNodeExchangeRates;
+  RUB: NomicsNodeExchangeRates;
+  RWF: NomicsNodeExchangeRates;
+  SAR: NomicsNodeExchangeRates;
+  SBD: NomicsNodeExchangeRates;
+  SCR: NomicsNodeExchangeRates;
+  SDG: NomicsNodeExchangeRates;
+  SEK: NomicsNodeExchangeRates;
+  SGD: NomicsNodeExchangeRates;
+  SHP: NomicsNodeExchangeRates;
+  SLL: NomicsNodeExchangeRates;
+  SOS: NomicsNodeExchangeRates;
+  SRD: NomicsNodeExchangeRates;
+  STD: NomicsNodeExchangeRates;
+  SVC: NomicsNodeExchangeRates;
+  SYP: NomicsNodeExchangeRates;
+  SZL: NomicsNodeExchangeRates;
+  THB: NomicsNodeExchangeRates;
+  TJS: NomicsNodeExchangeRates;
+  TMT: NomicsNodeExchangeRates;
+  TND: NomicsNodeExchangeRates;
+  TOP: NomicsNodeExchangeRates;
+  TRY: NomicsNodeExchangeRates;
+  TTD: NomicsNodeExchangeRates;
+  TWD: NomicsNodeExchangeRates;
+  TZS: NomicsNodeExchangeRates;
+  UAH: NomicsNodeExchangeRates;
+  UGX: NomicsNodeExchangeRates;
+  USD: NomicsNodeExchangeRates;
+  UYU: NomicsNodeExchangeRates;
+  UZS: NomicsNodeExchangeRates;
+  VEF: NomicsNodeExchangeRates;
+  VND: NomicsNodeExchangeRates;
+  VUV: NomicsNodeExchangeRates;
+  WST: NomicsNodeExchangeRates;
+  XAF: NomicsNodeExchangeRates;
+  XAG: NomicsNodeExchangeRates;
+  XAU: NomicsNodeExchangeRates;
+  XCD: NomicsNodeExchangeRates;
+  XDR: NomicsNodeExchangeRates;
+  XOF: NomicsNodeExchangeRates;
+  XPF: NomicsNodeExchangeRates;
+  YER: NomicsNodeExchangeRates;
+  ZAR: NomicsNodeExchangeRates;
+  ZMK: NomicsNodeExchangeRates;
+  ZMW: NomicsNodeExchangeRates;
+  ZWL: NomicsNodeExchangeRates;
+}
+interface NomicsNodeExchangeRates {
+  currency: string;
+  rate: string;
+  timestamp: string;
 }
 
 type NomicsNodePricesCurrencies = keyof NomicsNodePrices;

@@ -50,10 +50,41 @@ class NomicsNode {
         }, {});
         return pricesObject;
     }
+    /**
+     * Get exchangeRates with a single object.
+     *
+     * {
+     *  USD:
+     *  { currency: 'USD',
+     *    rate: 1,
+     *    timestamp: '2019-01-16T00:00:00Z' },
+     *  EUR:
+     *  { currency: 'EUR',
+     *    rate: 1.14142,
+     *    timestamp: '2019-01-16T00:00:00Z' },
+     *  JPY:
+     *  { currency: 'JPY',
+     *    rate: 0.0092,
+     *    timestamp: '2019-01-16T00:00:00Z' },
+     *  ...
+     */
+    async exchangeRatesObject() {
+        const ratesArray = await this.api.exchangeRates();
+        // @ts-ignore
+        const ratesObject = ratesArray.reduce((previousValue, currentValue) => {
+            return Object.assign({}, previousValue, { [currentValue.currency]: {
+                    currency: currentValue.currency,
+                    rate: Number(currentValue.rate),
+                    timestamp: currentValue.timestamp,
+                } });
+        }, {});
+        return ratesObject;
+    }
+    /** Dashboard version of the pricesObject method. */
     async dashboardObject() {
         const dashboard = await this.api.dashboard();
         const dashboardObject = dashboard.reduce((previousValue, currentValue) => {
-            /** Make it easy to handle in GraphQL */
+            /** Change the key name for easy handling in GraphQL */
             const currencyName = /^[_A-Za-z]/.test(currentValue.currency)
                 ? currentValue.currency
                 : "_" + currentValue.currency;
