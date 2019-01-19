@@ -69,3 +69,19 @@ Get exchangeRates with a single object.
          rate: 0.0092,
          timestamp: '2019-01-16T00:00:00Z' },
        ...
+
+#### currenciesIntervalObject()
+Get currenciesInterval with a single object.
+      
+      {
+        BTC:
+        { currency: 'BTC',
+          volume: 4887265624.18739,
+          open: 3650.91796,
+          open_timestamp: '2019-01-13T00:00:00Z',
+          close: 3770.37047,
+          close_timestamp: '2019-01-19T00:00:00Z' },
+        ETH:
+        { currency: 'ETH',
+          volume: 2011702447.65631,
+        ...

@@ -1,4 +1,5 @@
 import Nomics from "./index";
+import {NomicsCurrencyInterval} from "./index";
 
 /**
  * This class converts the data retrieved by the API
@@ -113,6 +114,66 @@ export class NomicsNode {
     return dashboardObject;
   }
 
+  /**
+   * Get currenciesInterval with a single object.
+   *
+   * {
+   *  BTC:
+   *  { currency: 'BTC',
+   *    volume: 4887265624.18739,
+   *    open: 3650.91796,
+   *    open_timestamp: '2019-01-13T00:00:00Z',
+   *    close: 3770.37047,
+   *    close_timestamp: '2019-01-19T00:00:00Z' },
+   *  ETH:
+   *  { currency: 'ETH',
+   *    volume: 2011702447.65631,
+   *  ...
+   */
+  async currenciesIntervalObject({ startISOString, endISOString }:
+    { startISOString: string, endISOString?: string }):
+    Promise<NomicsNodeCurrenciesIntervalObject> {
+      const currenciesInterval = await this.api.currenciesInterval({startISOString, endISOString});
+
+      const currenciesIntervalObject =
+        currenciesInterval.reduce<NomicsNodeCurrenciesIntervalObject>((previousValue, currentValue) => {
+          /** Change the key name for easy handling in GraphQL */
+          const currencyName = /^[_A-Za-z]/.test(currentValue.currency)
+                            ? currentValue.currency
+                            : "_" + currentValue.currency;
+
+          const numberObj =
+            Object.entries(currentValue).reduce((pValue, cValue) => {
+              const value = ["currency" , "open_timestamp" , "close_timestamp"].includes(cValue[0])
+                          ? cValue[1]
+                          : Number(cValue[1]);
+              return {...pValue, [cValue[0]]: value};
+            }, {});
+
+          return {...previousValue, [currencyName] : numberObj};
+        // @ts-ignore
+        }, {});
+      return currenciesIntervalObject;
+    }
+
+  private currenciesInterval24h() {
+    const yesterday =  (new Date(Date.now() - (86400 * 1000))).toISOString().split(".")[0] + "Z";
+    return this.currenciesIntervalObject({startISOString: yesterday});
+  }
+
+}
+
+type NomicsNodeCurrenciesIntervalObject = {
+  [key in NomicsNodePricesCurrencies]: NomicsNodeCurrencyInterval;
+};
+
+interface NomicsNodeCurrencyInterval {
+  currency: string;
+  volume: number;
+  open: number;
+  open_timestamp: string;
+  close: number;
+  close_timestamp: string;
 }
 
 interface NomicsNodeExchangeRatesObject {
@@ -288,7 +349,7 @@ interface NomicsNodeExchangeRatesObject {
 }
 interface NomicsNodeExchangeRates {
   currency: string;
-  rate: string;
+  rate: number;
   timestamp: string;
 }
 

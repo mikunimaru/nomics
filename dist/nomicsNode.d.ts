@@ -51,6 +51,38 @@ export declare class NomicsNode {
     exchangeRatesObject(): Promise<NomicsNodeExchangeRatesObject>;
     /** Dashboard version of the pricesObject method. */
     dashboardObject(): Promise<NomicsNodeDashboardObject>;
+    /**
+     * Get currenciesInterval with a single object.
+     *
+     * {
+     *  BTC:
+     *  { currency: 'BTC',
+     *    volume: 4887265624.18739,
+     *    open: 3650.91796,
+     *    open_timestamp: '2019-01-13T00:00:00Z',
+     *    close: 3770.37047,
+     *    close_timestamp: '2019-01-19T00:00:00Z' },
+     *  ETH:
+     *  { currency: 'ETH',
+     *    volume: 2011702447.65631,
+     *  ...
+     */
+    currenciesIntervalObject({ startISOString, endISOString }: {
+        startISOString: string;
+        endISOString?: string;
+    }): Promise<NomicsNodeCurrenciesIntervalObject>;
+    private currenciesInterval24h;
+}
+declare type NomicsNodeCurrenciesIntervalObject = {
+    [key in NomicsNodePricesCurrencies]: NomicsNodeCurrencyInterval;
+};
+interface NomicsNodeCurrencyInterval {
+    currency: string;
+    volume: number;
+    open: number;
+    open_timestamp: string;
+    close: number;
+    close_timestamp: string;
 }
 interface NomicsNodeExchangeRatesObject {
     AED: NomicsNodeExchangeRates;
@@ -225,7 +257,7 @@ interface NomicsNodeExchangeRatesObject {
 }
 interface NomicsNodeExchangeRates {
     currency: string;
-    rate: string;
+    rate: number;
     timestamp: string;
 }
 declare type NomicsNodePricesCurrencies = keyof NomicsNodePrices;

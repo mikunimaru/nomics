@@ -612,7 +612,7 @@ export default class Nomics {
   }
 }
 
-interface NomicsCurrencyInterval {
+export interface NomicsCurrencyInterval {
   currency: string;
   volume: string;
   open: string;
@@ -621,7 +621,7 @@ interface NomicsCurrencyInterval {
   close_timestamp: string;
 }
 
-interface NomicsAllTimeHighs {
+export interface NomicsAllTimeHighs {
   currency: string;
   price: string;
   timestamp: string;
@@ -629,7 +629,7 @@ interface NomicsAllTimeHighs {
   quote: string;
 }
 
-interface NomicsDashboard {
+export interface NomicsDashboard {
   currency: string;
   dayOpen: string;
   dayVolume: string;
@@ -652,27 +652,27 @@ interface NomicsDashboard {
   maxSupply: string;
 }
 
-interface NomicsCurrenciesSparkline {
+export interface NomicsCurrenciesSparkline {
   currency: string;
   timestamps: string[];
   prices: string[];
 }
 
-interface NomicsMarkets {
+export interface NomicsMarkets {
   exchange: string;
   market: string;
   base: string;
   quote: string;
 }
 
-interface NomicsMarketPrices {
+export interface NomicsMarketPrices {
   exchange: string;
   quote: string;
   price: string;
   timestamp: string;
 }
 
-interface NomicsMarketInterval {
+export interface NomicsMarketInterval {
   exchange: string;
   quote: string;
   volume: string;
@@ -682,7 +682,7 @@ interface NomicsMarketInterval {
   close_timestamp: string;
 }
 
-interface NomicsExchangeMarketPrices {
+export interface NomicsExchangeMarketPrices {
   exchange: string;
   base: string;
   quote: string;
@@ -690,7 +690,7 @@ interface NomicsExchangeMarketPrices {
   timestamp: string;
 }
 
-interface NomicsExchangeMarketInterval {
+export interface NomicsExchangeMarketInterval {
   exchange: string;
   base: string;
   quote: string;
@@ -703,7 +703,7 @@ interface NomicsExchangeMarketInterval {
   num_trades: string;
 }
 
-interface NomicsAggregatedOHLCVCandles {
+export interface NomicsAggregatedOHLCVCandles {
   timestamp: string;
   low: string;
   open: string;
@@ -712,7 +712,7 @@ interface NomicsAggregatedOHLCVCandles {
   volume: string;
 }
 
-interface NomicsExchangeOHLCVCandles {
+export interface NomicsExchangeOHLCVCandles {
   timestamp: string;
   low: string;
   open: string;
@@ -722,7 +722,7 @@ interface NomicsExchangeOHLCVCandles {
   num_trades: string;
 }
 
-interface NomicsExhangeRateInterval {
+export interface NomicsExhangeRateInterval {
   currency: string;
   open: string;
   open_timestamp: string;
